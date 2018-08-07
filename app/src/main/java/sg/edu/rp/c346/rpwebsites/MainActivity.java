@@ -1,6 +1,8 @@
 package sg.edu.rp.c346.rpwebsites;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,12 +23,35 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> aacategory;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor prefEdit = prefs.edit();
+        int pos1 =   spncate.getSelectedItemPosition();
+        int pos2 =spnsub.getSelectedItemPosition();
+        prefEdit.putInt("pos1",pos1);
+        prefEdit.putInt("pos2",pos2);
+        prefEdit.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        int pos1=prefs.getInt("pos1",0);
+        int pos2=prefs.getInt("pos2",0);
+        spncate.setSelection(pos1);
+        spnsub.setSelection(pos2);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         spncate = findViewById(R.id.spinnerCategory);
         spnsub = findViewById(R.id.spinnerSubCategory);
         btngo = findViewById(R.id.buttonGo);
+
         btngo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

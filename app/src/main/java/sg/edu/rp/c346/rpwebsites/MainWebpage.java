@@ -21,9 +21,9 @@ public class MainWebpage extends AppCompatActivity {
         String URL = intentReceived.getStringExtra("URL");
         Log.i("URL",URL+"");
         wvpage.loadUrl(URL);
-
+        /*
         wvpage.getSettings().setJavaScriptEnabled(true);
         wvpage.getSettings().setBuiltInZoomControls(true);
-
+*/
     }
 }

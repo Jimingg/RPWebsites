@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         SharedPreferences.Editor prefEdit = prefs.edit();
-        int pos1 =   spncate.getSelectedItemPosition();
+        int pos1 =spncate.getSelectedItemPosition();
         int pos2 =spnsub.getSelectedItemPosition();
         prefEdit.putInt("pos1",pos1);
         prefEdit.putInt("pos2",pos2);
